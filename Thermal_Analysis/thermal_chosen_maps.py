@@ -153,7 +153,9 @@ def _month_hour_clo(df: pd.DataFrame, clo_col: str, occ_col: str) -> np.ndarray:
     d["Month"] = pd.to_numeric(d["Month"], errors="coerce")
     d["Hour"] = pd.to_numeric(d["Hour"], errors="coerce")
 
-    occ = pd.to_numeric(d[occ_col], errors="coerce") == 1
+    #clothing
+    occ = pd.to_numeric(d[occ_col], errors="coerce") >= 0.2  # <-- same threshold
+
     clo = pd.to_numeric(d[clo_col], errors="coerce")
 
     valid = occ & np.isfinite(clo) & d["Month"].between(1, 12) & d["Hour"].between(0, 23)
