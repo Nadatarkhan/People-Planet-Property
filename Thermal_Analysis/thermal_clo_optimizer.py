@@ -190,7 +190,7 @@ def _run_one_zone(
     df_out["PPD"] = np.nan
 
     #####Ocupancy patch#####
-    occ_mask = (pd.to_numeric(df_out["OCC"], errors="coerce") == 0.2)
+    occ_mask = (pd.to_numeric(df_out["OCC"], errors="coerce") >= 0.2)
     occ_n = int(occ_mask.sum())
     if occ_n == 0:
         return df_out, occ_mask.to_numpy(dtype=bool), {
