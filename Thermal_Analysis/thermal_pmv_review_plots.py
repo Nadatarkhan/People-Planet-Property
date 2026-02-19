@@ -166,8 +166,10 @@ def pmv_month_hour_heatmap_and_stats(
     d["Month"] = pd.to_numeric(d["Month"], errors="coerce")
     d["Hour"] = pd.to_numeric(d["Hour"], errors="coerce")
 
+    ####Patch for occupancy
     if "OCC" in d.columns:
-        occ = pd.to_numeric(d["OCC"], errors="coerce") == 1
+        occ_val = pd.to_numeric(d["OCC"], errors="coerce")
+        occ = occ_val >= 0.2  # <-- change threshold
     else:
         occ = pd.Series(True, index=d.index)
 
