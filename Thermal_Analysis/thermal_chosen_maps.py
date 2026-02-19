@@ -116,7 +116,8 @@ def _month_hour_score(df: pd.DataFrame, pmv_col: str) -> np.ndarray:
 
     d["Month"] = pd.to_numeric(d["Month"], errors="coerce")
     d["Hour"] = pd.to_numeric(d["Hour"], errors="coerce")
-    occ = pd.to_numeric(d["OCC"], errors="coerce") == 1
+    occ = pd.to_numeric(d["OCC"], errors="coerce") >= 0.2   # <-- pick threshold
+
     pmv = pd.to_numeric(d[pmv_col], errors="coerce")
 
     valid = occ & np.isfinite(pmv) & d["Month"].between(1, 12) & d["Hour"].between(0, 23)
